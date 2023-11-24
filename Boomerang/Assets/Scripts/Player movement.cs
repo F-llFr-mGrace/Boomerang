@@ -12,6 +12,7 @@ public class Playermovement : MonoBehaviour
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float planeSpeed = 500;
     [SerializeField] float planeSpeedboostValue = 2;
+    [SerializeField] float planeBrakeValue = 2;
     float rotSpeed = 0;
     float planeSpeedboost = 1;
 
@@ -31,7 +32,27 @@ public class Playermovement : MonoBehaviour
     private void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        RotControl();
+        SpeedControl();
+    }
 
+    private void SpeedControl()
+    {
+        planeSpeedboost = 1;
+
+        if (moveInput.y > float.Epsilon)
+        {
+            planeSpeedboost = planeSpeedboostValue;
+        }
+
+        if (moveInput.y < -float.Epsilon)
+        {
+            planeSpeedboost = planeBrakeValue;
+        }
+    }
+
+    private void RotControl()
+    {
         rotSpeed = 0;
 
         if (moveInput.x > float.Epsilon)
@@ -42,13 +63,6 @@ public class Playermovement : MonoBehaviour
         if (moveInput.x < -float.Epsilon)
         {
             rotSpeed = rotSpeedValue;
-        }
-
-        planeSpeedboost = 1;
-
-        if (moveInput.y > float.Epsilon)
-        {
-            planeSpeedboost = planeSpeedboostValue;
         }
     }
 }
