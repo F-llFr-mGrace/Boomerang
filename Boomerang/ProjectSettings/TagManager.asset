@@ -47,15 +47,15 @@ TagManager:
   - name: Background
     uniqueID: 1926247005
     locked: 0
-  - name: Emplacements
+  - name: Emplacement
     uniqueID: 1487807741
     locked: 0
   - name: Radar
     uniqueID: 623591099
     locked: 0
-  - name: Missiles
+  - name: Missile
     uniqueID: 536059247
     locked: 0
-  - name: Planes
+  - name: Plane
     uniqueID: 1033036961
     locked: 0

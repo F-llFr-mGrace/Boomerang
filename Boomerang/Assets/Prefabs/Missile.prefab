@@ -129,6 +129,7 @@ MonoBehaviour:
   rotSpeedValue: 400
   missileSpeed: 20000
   target: {fileID: 0}
+  targetIndex: 0
 --- !u!58 &5410342289655466295
 CircleCollider2D:
   m_ObjectHideFlags: 0
