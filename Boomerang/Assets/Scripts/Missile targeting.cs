@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Missiletargeting : MonoBehaviour
 {
-    [SerializeField] GameObject target;
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float missileSpeed = 500;
     Rigidbody2D missilePhys;
     Rigidbody2D targetPhys;
     float rotSpeed = 0;
+    public GameObject target;
 
-    private void Start()
+    void Start()
     {
         missilePhys = GetComponent<Rigidbody2D>();
         targetPhys = target.GetComponent<Rigidbody2D>();
@@ -23,6 +23,18 @@ public class Missiletargeting : MonoBehaviour
 
         Vector2 tmp = new Vector2(missileSpeed * Time.deltaTime, missileSpeed * Time.deltaTime);
         missilePhys.AddForce(tmp * transform.up);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("Kill Player");
+        }
+        if (collision.CompareTag("Bandit"))
+        {
+            Debug.Log("Kill Bandit");
+        }
     }
 
     private void RotCtrl(float targetAngle)
@@ -44,12 +56,6 @@ public class Missiletargeting : MonoBehaviour
 
     private float MissileTargeting()
     {
-        if (missilePhys == null || targetPhys == null)
-        {
-            Debug.LogError("Missile or target is null.");
-            return 0f;
-        }
-
         Vector2 distanceToTarget = targetPhys.position - missilePhys.position;
         Vector2 relativeVelocity = targetPhys.velocity - missilePhys.velocity;
 
@@ -64,6 +70,11 @@ public class Missiletargeting : MonoBehaviour
         Vector2 directionToTarget = interceptPoint - missilePhys.position;
 
         float targetAngle = Vector2.SignedAngle(missilePhys.transform.up, directionToTarget);
+
+        if (targetAngle > 45 || targetAngle < -45)
+        {
+            Destroy(gameObject);
+        }
 
         return targetAngle;
     }

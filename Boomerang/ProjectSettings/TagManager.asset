@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bandit
   - Missile
+  - Radar
   layers:
   - Default
   - TransparentFX
@@ -46,7 +47,13 @@ TagManager:
   - name: Background
     uniqueID: 1926247005
     locked: 0
-  - name: Ouch
+  - name: Emplacements
+    uniqueID: 1487807741
+    locked: 0
+  - name: Radar
+    uniqueID: 623591099
+    locked: 0
+  - name: Missiles
     uniqueID: 536059247
     locked: 0
   - name: Planes
