@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Playermovement : MonoBehaviour
 {
-    Rigidbody2D planePhys;
-    Vector2 moveInput;
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float planeSpeed = 500;
     [SerializeField] float planeSpeedboostValue = 2;
     [SerializeField] float planeBrakeValue = 2;
+    Rigidbody2D planePhys;
+    Vector2 moveInput;
     float rotSpeed = 0;
     float planeSpeedboost = 1;
 
