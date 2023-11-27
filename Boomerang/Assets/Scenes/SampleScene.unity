@@ -977,63 +977,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1833411803
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -585.35535
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 363.84625
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6223167831308052215, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_Name
-      value: AI plane (Bandit) (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
 --- !u!4 &2077087233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8279536846877629717, guid: b94c4b969c5bbb8449c2b42a65ace67e, type: 3}
@@ -1254,4 +1197,3 @@ SceneRoots:
   - {fileID: 588029517}
   - {fileID: 513329838}
   - {fileID: 1541789316}
-  - {fileID: 1833411803}

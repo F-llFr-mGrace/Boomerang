@@ -70,18 +70,7 @@ public class AiPlaneHandling : MonoBehaviour
         SpeedCtrl();
         AddSpeed();
 
-        if (aiStateIndex == 0)
-        {
-            if (planePhys.position.x < loiterPos.x + 20 && planePhys.position.x > loiterPos.x - 20)
-            {
-                aiStateIndex = 1;
-            }
-
-            if (planePhys.position.x < spawnPos.x + 20 && planePhys.position.x > spawnPos.x - 20)
-            {
-                aiStateIndex = 1;
-            }
-        }
+        State0To1();
 
         if (aiStateIndex == 0 | aiStateIndex == 1)
         {
@@ -94,6 +83,22 @@ public class AiPlaneHandling : MonoBehaviour
         }
 
         TurnToTarget();
+    }
+
+    private void State0To1()
+    {
+        if (aiStateIndex == 0)
+        {
+            if (planePhys.position.x < loiterPos.x + 20 && planePhys.position.x > loiterPos.x - 20)
+            {
+                aiStateIndex = 1;
+            }
+
+            if (planePhys.position.x < spawnPos.x + 20 && planePhys.position.x > spawnPos.x - 20)
+            {
+                aiStateIndex = 1;
+            }
+        }
     }
 
     private void TurnToTarget()
