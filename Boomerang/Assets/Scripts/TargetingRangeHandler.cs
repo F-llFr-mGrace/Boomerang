@@ -16,9 +16,9 @@ public class TargetingRangeHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Trigger enter");
-        if (!isTarget)
+        if (other.CompareTag("Blue") || other.CompareTag("BlueAi") || other.CompareTag("Bandit") || other.CompareTag("BanditAi"))
         {
-            if (other.CompareTag("Blue") || other.CompareTag("BlueAi") || other.CompareTag("Bandit") || other.CompareTag("BanditAi"))
+            if (!isTarget)
             {
                 Debug.Log("!isTarget");
                 AiPlaneHandling AiPlaneHandlingScript = AiSelf.GetComponent<AiPlaneHandling>();

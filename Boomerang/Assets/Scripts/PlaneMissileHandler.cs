@@ -36,19 +36,22 @@ public class PlaneMissileHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CompareTag("BanditAi"))
+        if (radarScope.IsTouching(collision.GetComponent<Collider2D>()))
         {
-            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
+            if (CompareTag("BanditAi"))
             {
-                Invoke("OnFire", Time.deltaTime);
+                if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
+                {
+                    Invoke("OnFire", Time.deltaTime);
+                }
             }
-        }
 
-        if (CompareTag("BlueAi"))
-        {
-            if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+            if (CompareTag("BlueAi"))
             {
-                Invoke("OnFire", Time.deltaTime);
+                if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+                {
+                    Invoke("OnFire", Time.deltaTime);
+                }
             }
         }
     }
