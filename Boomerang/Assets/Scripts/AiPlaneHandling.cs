@@ -10,6 +10,7 @@ public class AiPlaneHandling : MonoBehaviour
     [SerializeField] SpriteRenderer targetingRangeSpriteRenderer;
     [SerializeField] SpriteRenderer planeSpriteRenderer;
     [SerializeField] Transform targetingRangeTrans;
+    [SerializeField] GameObject targetingRangeObject;
     Rigidbody2D planePhys;
     Vector2 spawnPos;
     Vector2 directionToTarget = new Vector2 (0,0);
@@ -28,7 +29,7 @@ public class AiPlaneHandling : MonoBehaviour
      * 2 = Seeking
      * 3 = RTB
      */
-    int aiStateIndex = 0;
+    public int aiStateIndex = 0;
 
     private void Start()
     {
@@ -65,6 +66,7 @@ public class AiPlaneHandling : MonoBehaviour
 
     private void Update()
     {
+        TargetingRangeHandler TargetingRangeHandlerScript = targetingRangeObject.GetComponent<TargetingRangeHandler>();
         targetingRangeTrans.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         SpeedCtrl();
@@ -79,7 +81,7 @@ public class AiPlaneHandling : MonoBehaviour
 
         if (aiStateIndex == 2)
         {
-            directionToTarget = loiterPos - planePhys.position;
+            directionToTarget = TargetingRangeHandlerScript.targetToGoTo.position - planePhys.position;
         }
 
         TurnToTarget();
