@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class AiPlaneHandling : MonoBehaviour
 {
@@ -8,8 +7,10 @@ public class AiPlaneHandling : MonoBehaviour
     [SerializeField] float planeSpeed = 500;
     [SerializeField] float planeSpeedboostValue = 2;
     [SerializeField] float planeBrakeValue = 2;
+    [SerializeField] SpriteRenderer targetingRangeSpriteRenderer;
+    [SerializeField] SpriteRenderer planeSpriteRenderer;
+    [SerializeField] Transform targetingRangeTrans;
     Rigidbody2D planePhys;
-    SpriteRenderer spriteRenderer;
     Vector2 spawnPos;
     Vector2 directionToTarget = new Vector2 (0,0);
     float rotSpeed = 0;
@@ -35,7 +36,6 @@ public class AiPlaneHandling : MonoBehaviour
         rotSpeedValueStore = rotSpeedValue;
 
         planePhys = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         CullNoTeam();
 
@@ -46,12 +46,14 @@ public class AiPlaneHandling : MonoBehaviour
     {
         if (CompareTag("BlueAi"))
         {
-            spriteRenderer.color = Color.blue;
+            planeSpriteRenderer.color = Color.blue;
+            targetingRangeSpriteRenderer.color = Color.blue;
         }
 
         else if (CompareTag("BanditAi"))
         {
-            spriteRenderer.color = Color.red;
+            planeSpriteRenderer.color = Color.red;
+            targetingRangeSpriteRenderer.color = Color.red;
         }
 
         else
@@ -63,13 +65,29 @@ public class AiPlaneHandling : MonoBehaviour
 
     private void Update()
     {
+        targetingRangeTrans.rotation = Quaternion.Euler(0f, 0f, 0f);
+
         SpeedCtrl();
         AddSpeed();
+
+        if (aiStateIndex == 0)
+        {
+            if (planePhys.position.x < loiterPos.x + 20 && planePhys.position.x > loiterPos.x - 20)
+            {
+                aiStateIndex = 1;
+            }
+
+            if (planePhys.position.x < spawnPos.x + 20 && planePhys.position.x > spawnPos.x - 20)
+            {
+                aiStateIndex = 1;
+            }
+        }
 
         if (aiStateIndex == 0 | aiStateIndex == 1)
         {
             UseSpawnOrLoiter();
         }
+
         if (aiStateIndex == 2)
         {
             directionToTarget = loiterPos - planePhys.position;

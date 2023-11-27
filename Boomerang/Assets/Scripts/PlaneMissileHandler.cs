@@ -1,63 +1,20 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaneMissileHandler : MonoBehaviour
 {
     [SerializeField] GameObject missile;
-    [SerializeField] GameObject targetingRangeChild;
-    [SerializeField] int missileCount = 5;
-    [SerializeField] TextMeshProUGUI missileCountText;
+    [SerializeField] Rigidbody2D planePhys;
+    [SerializeField] Transform planeTran;
+    [SerializeField] PolygonCollider2D radarScope;
     GameObject missileInstance;
     GameObject lockTarget = null;
     GameObject closestTarget = null;
-    Transform planeTran;
-    Transform targetingRangeChildTrans;
-    PolygonCollider2D radarScope;
-    CircleCollider2D targetingRange;
-    Rigidbody2D planePhys;
     int intendedTarget = 0;
     bool isValidTarget = false;
-    bool isBanditAi = false;
     Color missileColor = Color.white;
 
-
-    public Canvas gameCanvas;
+    public int missileCount = 5;
     public bool isChaff;
-
-    void Start()
-    {
-        if (CompareTag("BanditAi"))
-        {
-            isBanditAi = true;
-        }
-
-        planePhys = GetComponent<Rigidbody2D>();
-        planeTran = GetComponent<Transform>();
-        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
-        {
-            targetingRangeChildTrans = targetingRangeChild.GetComponent<Transform>();
-        }
-        radarScope = GetComponentInChildren<PolygonCollider2D>();
-
-        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
-        {
-            targetingRange = GetComponentInChildren<CircleCollider2D>();
-        }
-
-        if (CompareTag("Blue"))
-        {
-            missileCountText.text = ("Missile Count : " + missileCount);
-        }
-    }
-
-    private void Update()
-    {
-        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
-        {
-            targetingRangeChildTrans.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -162,11 +119,6 @@ public class PlaneMissileHandler : MonoBehaviour
                 missileInstanceColor.color = missileColor;
 
                 missileCount--;
-
-                if (CompareTag("Blue"))
-                {
-                    missileCountText.text = ("Missile Count : " + missileCount);
-                }
             }
         }
     }
