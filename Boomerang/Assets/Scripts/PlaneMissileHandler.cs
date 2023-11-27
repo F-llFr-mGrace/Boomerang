@@ -108,9 +108,15 @@ public class PlaneMissileHandler : MonoBehaviour
             intendedTarget = 2;
             missileColor = Color.green;
         }
-        if (missileCount > 0)
+        if (isValidTarget) 
         {
-            if (isValidTarget)
+            if (CompareTag("BlueAi") || CompareTag("BanditAi"))
+            {
+                AiPlaneHandling AiPlaneHandlingScript = GetComponent<AiPlaneHandling>();
+                AiPlaneHandlingScript.aiStateIndex = 0;
+            }
+
+            if (missileCount > 0)
             {
                 missileInstance = Instantiate(missile, planeTran.position, planeTran.rotation);
 
@@ -122,6 +128,7 @@ public class PlaneMissileHandler : MonoBehaviour
                 missileInstanceColor.color = missileColor;
 
                 missileCount--;
+                Debug.Log("Missile Fired at: " + closestTarget.name);
             }
         }
     }

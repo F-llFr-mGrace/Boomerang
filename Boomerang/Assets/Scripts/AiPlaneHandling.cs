@@ -89,17 +89,25 @@ public class AiPlaneHandling : MonoBehaviour
 
     private void State0To1()
     {
-        if (aiStateIndex == 0)
-        {
-            if (planePhys.position.x < loiterPos.x + 20 && planePhys.position.x > loiterPos.x - 20)
+            if (Vector2.Distance(planePhys.position, loiterPos) < 50)
             {
                 aiStateIndex = 1;
+                Invoke("State2", .1f);
             }
 
-            if (planePhys.position.x < spawnPos.x + 20 && planePhys.position.x > spawnPos.x - 20)
+            if (Vector2.Distance(planePhys.position, spawnPos) < 50)
             {
                 aiStateIndex = 1;
+                Invoke("State2", .1f);
             }
+    }
+
+    private void State2()
+    {
+        TargetingRangeHandler TargetingRangeHandlerScript = targetingRangeObject.GetComponent<TargetingRangeHandler>();
+        if (TargetingRangeHandlerScript.isHere)
+        {
+            aiStateIndex = 2;
         }
     }
 

@@ -7,6 +7,7 @@ public class MissileTargeting : MonoBehaviour
     Rigidbody2D missilePhys;
     Rigidbody2D targetPhys;
     float rotSpeed = 0;
+    bool lookEnable = false;
 
     public GameObject target;
 
@@ -20,15 +21,22 @@ public class MissileTargeting : MonoBehaviour
 
     void Start()
     {
+        Invoke("LookEnable", 0.5f);
         missilePhys = GetComponent<Rigidbody2D>();
         targetPhys = target.GetComponent<Rigidbody2D>();
         Destroy(gameObject, 60f);
+    }
+
+    private void LookEnable()
+    {
+        lookEnable = true;
     }
 
     private void Update()
     {
         if (target.Equals(null))
         {
+            Debug.Log("Null missile target (SD)");
             Destroy(gameObject);
         }
 
@@ -111,9 +119,13 @@ public class MissileTargeting : MonoBehaviour
 
         float targetAngle = Vector2.SignedAngle(missilePhys.transform.up, directionToTarget);
 
-        if (targetAngle > 90 || targetAngle < -90)
+        if (lookEnable == true)
         {
-            Destroy(gameObject);
+            if (targetAngle > 90 || targetAngle < -90)
+            {
+                Debug.Log("Target lost, " + targetAngle + " (SD)");
+                Destroy(gameObject);
+            }
         }
 
         return targetAngle;
