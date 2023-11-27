@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 1078036146}
   m_Layer: 0
   m_Name: Player Plane
-  m_TagString: Player
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -641,7 +641,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1033036961
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d1f862fbe4dd50e4188e4653f591338b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -756,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missile: {fileID: 4355769619911756211, guid: 9abd414c9c157cc4eaf1a61bd79b47c1, type: 3}
+  targetingRangeChild: {fileID: 0}
   missileCount: 5
   missileCountText: {fileID: 1458718850}
   gameCanvas: {fileID: 588029516}
@@ -929,28 +930,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458718848}
   m_CullTransparentMesh: 1
---- !u!1 &1866098697 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6223167831308052215, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-  m_PrefabInstance: {fileID: 4149006490979144250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1866098703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866098697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c270a2364022a408b1dacfa8837e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missile: {fileID: 4355769619911756211, guid: 9abd414c9c157cc4eaf1a61bd79b47c1, type: 3}
-  missileCount: 5
-  missileCountText: {fileID: 1458718850}
-  gameCanvas: {fileID: 588029516}
-  isChaff: 0
 --- !u!4 &2077087233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 367018733245388716, guid: b94c4b969c5bbb8449c2b42a65ace67e, type: 3}
@@ -964,6 +943,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1315161424201653339, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
+      propertyPath: gameCanvas
+      value: 
+      objectReference: {fileID: 588029516}
+    - target: {fileID: 1315161424201653339, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
+      propertyPath: missileCountText
+      value: 
+      objectReference: {fileID: 1458718850}
     - target: {fileID: 2492212049637851149, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 889
@@ -1004,21 +991,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4452296790235071355, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195497703076293598, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
+      propertyPath: m_Simulated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6223167831308052215, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
       propertyPath: m_Name
       value: AI plane (Bandit)
       objectReference: {fileID: 0}
-    - target: {fileID: 6223167831308052215, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      propertyPath: m_TagString
-      value: Bandit
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6223167831308052215, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1866098703}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5442a4c880e7f0f4c9c75b57e9b04d62, type: 3}
 --- !u!1001 &5678704894802186305
 PrefabInstance:

@@ -45,7 +45,7 @@ public class MissileTargeting : MonoBehaviour
     {
         if (targetIndex == 1)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
             {
                 Debug.Log("Kill Player");
                 Destroy(collision.gameObject);
@@ -54,7 +54,7 @@ public class MissileTargeting : MonoBehaviour
         }
         if (targetIndex == 2)
         {
-            if (collision.CompareTag("Bandit"))
+            if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
             {
                 Debug.Log("Kill Bandit");
                 Destroy(collision.gameObject);

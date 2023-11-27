@@ -1,20 +1,24 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlaneMissileHandler : MonoBehaviour
 {
     [SerializeField] GameObject missile;
+    [SerializeField] GameObject targetingRangeChild;
     [SerializeField] int missileCount = 5;
     [SerializeField] TextMeshProUGUI missileCountText;
     GameObject missileInstance;
     GameObject lockTarget = null;
     GameObject closestTarget = null;
     Transform planeTran;
+    Transform targetingRangeChildTrans;
     PolygonCollider2D radarScope;
+    CircleCollider2D targetingRange;
     Rigidbody2D planePhys;
     int intendedTarget = 0;
     bool isValidTarget = false;
-    bool isAi = false;
+    bool isBanditAi = false;
     Color missileColor = Color.white;
 
 
@@ -23,33 +27,50 @@ public class PlaneMissileHandler : MonoBehaviour
 
     void Start()
     {
-        if (gameObject.CompareTag("Bandit"))
+        if (CompareTag("BanditAi"))
         {
-            isAi = true;
+            isBanditAi = true;
         }
 
         planePhys = GetComponent<Rigidbody2D>();
         planeTran = GetComponent<Transform>();
+        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
+        {
+            targetingRangeChildTrans = targetingRangeChild.GetComponent<Transform>();
+        }
         radarScope = GetComponentInChildren<PolygonCollider2D>();
 
-        if (!isAi)
+        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
+        {
+            targetingRange = GetComponentInChildren<CircleCollider2D>();
+        }
+
+        if (CompareTag("Blue"))
         {
             missileCountText.text = ("Missile Count : " + missileCount);
         }
     }
 
+    private void Update()
+    {
+        if (CompareTag("BlueAi") || CompareTag("BanditAi"))
+        {
+            targetingRangeChildTrans.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (CompareTag("Player"))
+        if (CompareTag("Blue") || CompareTag("BlueAi"))
         {
-            if (collision.CompareTag("Bandit"))
+            if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
             {
                 InterceptLogic(collision);
             }
         }
-        if (CompareTag("Bandit"))
+        if (CompareTag("Bandit") || CompareTag("BanditAi"))
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
             {
                 InterceptLogic(collision);
             }
@@ -58,11 +79,19 @@ public class PlaneMissileHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CompareTag("Bandit"))
+        if (CompareTag("BanditAi"))
         {
-            if (collision.CompareTag("Player"))
+            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
             {
-                Invoke("OnFire", 1 * Time.deltaTime);
+                Invoke("OnFire", Time.deltaTime);
+            }
+        }
+
+        if (CompareTag("BlueAi"))
+        {
+            if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+            {
+                Invoke("OnFire", Time.deltaTime);
             }
         }
     }
@@ -109,12 +138,12 @@ public class PlaneMissileHandler : MonoBehaviour
 
     private void OnFire()
     {
-        if (isAi)
+        if (CompareTag("Bandit") || CompareTag("BanditAi"))
         {
             intendedTarget = 1;
             missileColor = Color.red;
         }
-        if (!isAi)
+        if (CompareTag("Blue") || CompareTag("BlueAi"))
         {
             intendedTarget = 2;
             missileColor = Color.green;
@@ -133,7 +162,11 @@ public class PlaneMissileHandler : MonoBehaviour
                 missileInstanceColor.color = missileColor;
 
                 missileCount--;
-                missileCountText.text = ("Missile Count : " + missileCount);
+
+                if (CompareTag("Blue"))
+                {
+                    missileCountText.text = ("Missile Count : " + missileCount);
+                }
             }
         }
     }

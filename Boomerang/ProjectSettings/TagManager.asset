@@ -7,6 +7,9 @@ TagManager:
   - Bandit
   - Missile
   - Radar
+  - Blue
+  - BanditAi
+  - BlueAi
   layers:
   - Default
   - TransparentFX
@@ -46,6 +49,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1926247005
+    locked: 0
+  - name: TargetingRange
+    uniqueID: 2009889639
     locked: 0
   - name: Emplacement
     uniqueID: 1487807741

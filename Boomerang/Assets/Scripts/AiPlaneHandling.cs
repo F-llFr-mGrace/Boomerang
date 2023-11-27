@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AIplanemovement : MonoBehaviour
+public class AiPlaneHandling : MonoBehaviour
 {
     //Flight characteristics
     [SerializeField] float rotSpeedValue = 400;
@@ -10,45 +10,46 @@ public class AIplanemovement : MonoBehaviour
     [SerializeField] float planeBrakeValue = 2;
     Rigidbody2D planePhys;
     SpriteRenderer spriteRenderer;
-    Vector2 moveInput;
-    Vector2 loiterPos;
+    Vector2 spawnPos;
+    Vector2 directionToTarget = new Vector2 (0,0);
     float rotSpeed = 0;
+    float rotSpeedSlow;
+    float rotSpeedValueStore;
     float planeSpeedboost = 1;
+
+    public Vector2 loiterPos = new Vector2(0,0);
+    public bool useLoiterPos = false;
 
     //AI parameters
     /*
+     * 0 = Move to Loiter
      * 1 = Loiter
      * 2 = Seeking
      * 3 = RTB
      */
-    int aiStateIndex = 1;
-
-    /*
-     * 0 = null (Destroy)
-     * 1 = Player
-     * 2 = Bandit
-     */
-    int aiTeam = 0;
-
+    int aiStateIndex = 0;
 
     private void Start()
     {
+        rotSpeedSlow = rotSpeedValue / 5;
+        rotSpeedValueStore = rotSpeedValue;
+
         planePhys = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         CullNoTeam();
 
-        loiterPos = planePhys.position;
+        spawnPos = planePhys.position;
     }
 
     private void CullNoTeam()
     {
-        if (CompareTag("Player"))
+        if (CompareTag("BlueAi"))
         {
             spriteRenderer.color = Color.blue;
         }
 
-        else if (CompareTag("Bandit"))
+        else if (CompareTag("BanditAi"))
         {
             spriteRenderer.color = Color.red;
         }
@@ -62,21 +63,47 @@ public class AIplanemovement : MonoBehaviour
 
     private void Update()
     {
-        planePhys.AddTorque(rotSpeed * Time.deltaTime);
+        SpeedCtrl();
+        AddSpeed();
 
+        if (aiStateIndex == 0 | aiStateIndex == 1)
+        {
+            UseSpawnOrLoiter();
+        }
+        if (aiStateIndex == 2)
+        {
+            directionToTarget = loiterPos - planePhys.position;
+        }
+
+        TurnToTarget();
+    }
+
+    private void TurnToTarget()
+    {
+        float targetAngle = Vector2.SignedAngle(planePhys.transform.up, directionToTarget);
+        RotCtrl(targetAngle);
+    }
+
+    private void AddSpeed()
+    {
         Vector2 tmp = new Vector2(planeSpeed * Time.deltaTime, planeSpeed * Time.deltaTime);
         planePhys.AddForce(tmp * transform.up * planeSpeedboost);
+    }
 
-        if (aiStateIndex == 1)
+    private void UseSpawnOrLoiter()
+    {
+        if (useLoiterPos)
         {
-            Vector2 directionToTarget = loiterPos - planePhys.position;
+            directionToTarget = loiterPos - planePhys.position;
+        }
 
-            float targetAngle = Vector2.SignedAngle(planePhys.transform.up, directionToTarget);
-            RotCtrl(targetAngle);
+        else
+        {
+            directionToTarget = spawnPos - planePhys.position;
         }
     }
 
-    private void SpeedControl()
+    private void SpeedCtrl()
     {
         planeSpeedboost = 1;
 
@@ -94,6 +121,12 @@ public class AIplanemovement : MonoBehaviour
     private void RotCtrl(float targetAngle)
     {
         rotSpeed = 0;
+        rotSpeedValue = rotSpeedValueStore;
+
+        if (aiStateIndex == 1)
+        {
+            rotSpeedValue = rotSpeedSlow;
+        }
 
         if (targetAngle > 1)
         {
