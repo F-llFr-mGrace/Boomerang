@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4894643553094148693}
   - component: {fileID: 1315161424201653339}
   m_Layer: 9
-  m_Name: AI plane (Bandit)
+  m_Name: AI plane
   m_TagString: BanditAi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
