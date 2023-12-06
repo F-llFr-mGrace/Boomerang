@@ -81,7 +81,9 @@ public class AiPlaneHandling : MonoBehaviour
 
         if (aiStateIndex == 2)
         {
+            if (TargetingRangeHandlerScript.targetToGoTo != null)
             directionToTarget = TargetingRangeHandlerScript.targetToGoTo.position - planePhys.position;
+            else aiStateIndex = 0;
         }
 
         TurnToTarget();

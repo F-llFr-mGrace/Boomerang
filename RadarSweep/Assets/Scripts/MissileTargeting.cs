@@ -104,30 +104,33 @@ public class MissileTargeting : MonoBehaviour
             }
         }
         */
-        Vector2 distanceToTarget = (targetPhys.position + chaffNoise) - missilePhys.position;
-        Vector2 relativeVelocity = targetPhys.velocity - missilePhys.velocity;
-
-        if (relativeVelocity.sqrMagnitude < 0.0001f)
+        if (targetPhys != null)
         {
-            Debug.LogError("Relative velocity is too small. Division by zero avoided.");
-            return 0f;
-        }
+            Vector2 distanceToTarget = (targetPhys.position + chaffNoise) - missilePhys.position;
+            Vector2 relativeVelocity = targetPhys.velocity - missilePhys.velocity;
 
-        float timeToIntercept = distanceToTarget.magnitude / relativeVelocity.magnitude;
-        Vector2 interceptPoint = targetPhys.position + targetPhys.velocity * timeToIntercept;
-        Vector2 directionToTarget = interceptPoint - missilePhys.position;
-
-        float targetAngle = Vector2.SignedAngle(missilePhys.transform.up, directionToTarget);
-
-        if (lookEnable == true)
-        {
-            if (targetAngle > 90 || targetAngle < -90)
+            if (relativeVelocity.sqrMagnitude < 0.0001f)
             {
-                Debug.Log("Target lost, " + targetAngle + " (SD)");
-                Destroy(gameObject);
+                Debug.LogError("Relative velocity is too small. Division by zero avoided.");
+                return 0f;
             }
-        }
 
-        return targetAngle;
+            float timeToIntercept = distanceToTarget.magnitude / relativeVelocity.magnitude;
+            Vector2 interceptPoint = targetPhys.position + targetPhys.velocity * timeToIntercept;
+            Vector2 directionToTarget = interceptPoint - missilePhys.position;
+
+            float targetAngle = Vector2.SignedAngle(missilePhys.transform.up, directionToTarget);
+
+            if (lookEnable == true)
+            {
+                if (targetAngle > 90 || targetAngle < -90)
+                {
+                    Debug.Log("Target lost, " + targetAngle + " (SD)");
+                    Destroy(gameObject);
+                }
+            }
+            return targetAngle;
+        }
+        return 0;
     }
 }

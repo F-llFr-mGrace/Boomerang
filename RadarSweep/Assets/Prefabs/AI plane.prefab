@@ -191,7 +191,8 @@ MonoBehaviour:
   planePhys: {fileID: 1983582779859319917}
   planeTran: {fileID: 2492212049637851149}
   radarScope: {fileID: 1340987164556268315}
-  missileCount: 5
+  missileCountMax: 6
+  missileCount: 6
   isChaff: 0
 --- !u!1001 &317451669805220489
 PrefabInstance:

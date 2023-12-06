@@ -1,8 +1,10 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerPlaneHandling : MonoBehaviour
 {
+    [SerializeField] CinemachineVirtualCamera mainCam;
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float planeSpeed = 500;
     [SerializeField] float planeSpeedboostValue = 2;
@@ -60,5 +62,16 @@ public class PlayerPlaneHandling : MonoBehaviour
         {
             rotSpeed = rotSpeedValue;
         }
+    }
+
+    private void OnCamControlAdd()
+    {
+        Debug.Log("Cam zoom out");
+        mainCam.m_Lens.OrthographicSize += 500;
+    }
+    private void OnCamControlSubtract()
+    {
+        Debug.Log("Cam zoom in");
+        mainCam.m_Lens.OrthographicSize -= 500;
     }
 }

@@ -10,7 +10,9 @@ public class PlaneMissileHandler : MonoBehaviour
     GameObject lockTarget = null;
     GameObject closestTarget = null;
     int intendedTarget = 0;
+    [SerializeField] int missileCountMax = 12;
     bool isValidTarget = false;
+    bool isReloading = false;
     Color missileColor = Color.white;
 
     public int missileCount = 5;
@@ -98,6 +100,12 @@ public class PlaneMissileHandler : MonoBehaviour
 
     private void OnFire()
     {
+        if (!isReloading)
+        {
+            Invoke("ReArmMissiles", 5f);
+            isReloading = true;
+        }
+
         if (CompareTag("Bandit") || CompareTag("BanditAi"))
         {
             intendedTarget = 1;
@@ -108,7 +116,7 @@ public class PlaneMissileHandler : MonoBehaviour
             intendedTarget = 2;
             missileColor = Color.green;
         }
-        if (isValidTarget) 
+        if (isValidTarget)
         {
             if (CompareTag("BlueAi") || CompareTag("BanditAi"))
             {
@@ -130,6 +138,19 @@ public class PlaneMissileHandler : MonoBehaviour
                 missileCount--;
                 Debug.Log("Missile Fired at: " + closestTarget.name);
             }
+        }
+    }
+
+    private void ReArmMissiles()
+    {
+        if (missileCount < missileCountMax)
+        {
+            missileCount++;
+            Invoke("ReArmMissiles", 5f);
+        }
+        else
+        {
+            isReloading = false;
         }
     }
 
