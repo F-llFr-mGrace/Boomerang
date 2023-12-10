@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MissileTargeting : MonoBehaviour
 {
+    [SerializeField] GameObject pip;
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float missileSpeed = 500;
     Rigidbody2D missilePhys;
@@ -21,10 +22,18 @@ public class MissileTargeting : MonoBehaviour
 
     void Start()
     {
+        Invoke("MakePip", 0.5f);
+
         Invoke("LookEnable", 0.5f);
         missilePhys = GetComponent<Rigidbody2D>();
         targetPhys = target.GetComponent<Rigidbody2D>();
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 20f);
+    }
+
+    private void MakePip()
+    {
+        Instantiate(pip, transform.position, transform.rotation);
+        Invoke("MakePip", 0.5f);
     }
 
     private void LookEnable()
@@ -49,25 +58,29 @@ public class MissileTargeting : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (targetIndex == 1)
+        if (collision != null && collision.gameObject != null && collision.gameObject.activeInHierarchy)
         {
-            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
+            if (targetIndex == 1)
             {
-                Debug.Log("Kill Player");
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
+                if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
+                {
+                    Debug.Log("Kill Player");
+                    Destroy(collision.gameObject);
+                    Destroy(gameObject);
+                }
             }
-        }
-        if (targetIndex == 2)
-        {
-            if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+            else if (targetIndex == 2)
             {
-                Debug.Log("Kill Bandit");
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
+                if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+                {
+                    Debug.Log("Kill Bandit");
+                    Destroy(collision.gameObject);
+                    Destroy(gameObject);
+                }
             }
         }
     }
+
 
     private void RotCtrl(float targetAngle)
     {
@@ -111,7 +124,7 @@ public class MissileTargeting : MonoBehaviour
 
             if (relativeVelocity.sqrMagnitude < 0.0001f)
             {
-                Debug.LogError("Relative velocity is too small. Division by zero avoided.");
+                Debug.Log("Relative velocity is too small. Division by zero avoided.");
                 return 0f;
             }
 

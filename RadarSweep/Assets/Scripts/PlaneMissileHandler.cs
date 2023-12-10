@@ -5,7 +5,6 @@ public class PlaneMissileHandler : MonoBehaviour
 {
     [SerializeField] GameObject missile;
     [SerializeField] Rigidbody2D planePhys;
-    [SerializeField] Transform planeTran;
     [SerializeField] PolygonCollider2D radarScope;
     GameObject missileInstance;
     GameObject lockTarget = null;
@@ -132,7 +131,7 @@ public class PlaneMissileHandler : MonoBehaviour
 
             if (missileCount > 0)
             {
-                missileInstance = Instantiate(missile, planeTran.position, planeTran.rotation);
+                missileInstance = Instantiate(missile, transform.position, transform.rotation);
 
                 MissileTargeting missileInstanceScript = missileInstance.GetComponent<MissileTargeting>();
                 missileInstanceScript.target = closestTarget;

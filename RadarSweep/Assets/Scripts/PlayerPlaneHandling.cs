@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerPlaneHandling : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera mainCam;
+    [SerializeField] GameObject playerRadar;
     [SerializeField] float rotSpeedValue = 400;
     [SerializeField] float planeSpeed = 500;
     [SerializeField] float planeSpeedboostValue = 2;
@@ -14,8 +15,11 @@ public class PlayerPlaneHandling : MonoBehaviour
     float rotSpeed = 0;
     float planeSpeedboost = 1;
 
+    public float radarRangeScale = 1;
+
     private void Start()
     {
+        playerRadar.transform.localScale = new Vector3(radarRangeScale, radarRangeScale, radarRangeScale);
         planePhys = GetComponent<Rigidbody2D>();
     }
 

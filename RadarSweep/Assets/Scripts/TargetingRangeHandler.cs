@@ -73,30 +73,36 @@ public class TargetingRangeHandler : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Trigger exit");
-        if (AiSelf.CompareTag("Bandit") || AiSelf.CompareTag("BanditAi"))
+        if (collision.gameObject.activeInHierarchy)
         {
-            if (collision.CompareTag("Blue") || collision.CompareTag("BlueAi"))
+            // Check if AiSelf and trackedTarget are not null before proceeding
+            if (AiSelf != null && trackedTarget != null)
             {
-                otherRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-                otherotherRigidbody = trackedTarget.GetComponent<Rigidbody2D>();
+                Debug.Log("Trigger exit");
 
-                if (otherRigidbody == targetToGoTo || trackedTarget == targetToGoTo)
-                {
-                    AiPlaneHandling AiPlaneHandlingScript = AiSelf.GetComponent<AiPlaneHandling>();
-                    AiPlaneHandlingScript.aiStateIndex = 0;
-                    isTarget = false;
-                    isHere = false;
-                }
-            }
-            if (AiSelf.CompareTag("Blue") || AiSelf.CompareTag("BlueAi"))
-            {
-                if (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi"))
+                if ((AiSelf.CompareTag("Bandit") || AiSelf.CompareTag("BanditAi")) &&
+                    (collision.CompareTag("Blue") || collision.CompareTag("BlueAi")))
                 {
                     otherRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
                     otherotherRigidbody = trackedTarget.GetComponent<Rigidbody2D>();
 
-                    if (otherRigidbody == targetToGoTo || trackedTarget == targetToGoTo)
+                    if (otherRigidbody != null && otherotherRigidbody != null &&
+                        (otherRigidbody == targetToGoTo || trackedTarget == targetToGoTo))
+                    {
+                        AiPlaneHandling AiPlaneHandlingScript = AiSelf.GetComponent<AiPlaneHandling>();
+                        AiPlaneHandlingScript.aiStateIndex = 0;
+                        isTarget = false;
+                        isHere = false;
+                    }
+                }
+                else if ((AiSelf.CompareTag("Blue") || AiSelf.CompareTag("BlueAi")) &&
+                         (collision.CompareTag("Bandit") || collision.CompareTag("BanditAi")))
+                {
+                    otherRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+                    otherotherRigidbody = trackedTarget.GetComponent<Rigidbody2D>();
+
+                    if (otherRigidbody != null && otherotherRigidbody != null &&
+                        (otherRigidbody == targetToGoTo || trackedTarget == targetToGoTo))
                     {
                         AiPlaneHandling AiPlaneHandlingScript = AiSelf.GetComponent<AiPlaneHandling>();
                         AiPlaneHandlingScript.aiStateIndex = 0;
@@ -105,7 +111,6 @@ public class TargetingRangeHandler : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 }

@@ -10,7 +10,22 @@ public class CheckForCompletion : MonoBehaviour
 
     void Start()
     {
-        Invoke("CheckCompletion", 10f);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Invoke("CheckCompletion", 10f);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex < 3)
+        {
+            Invoke("CheckCompletion", 30f);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex >= 3)
+        {
+            Invoke("CheckCompletion", 5f);
+        }
+        else
+        {
+            Invoke("CheckCompletion", 5f);
+        }
     }
 
     private void Update()
