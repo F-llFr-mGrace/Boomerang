@@ -30,14 +30,14 @@ public class CheckForCompletion : MonoBehaviour
 
         if (banditTag.Length == 0 && banditAiTag.Length == 0)
         {
-            //if current scene == scene count - intro scenes
+            //if current scene == scene count - credit scene
             if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
             }
         }
 

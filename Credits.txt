@@ -1,2 +1,15 @@
-Font
-Digital-Light Font | https://www.fontpalace.com/font-download/digital-light/
+GitHub
+https://github.com/F-llFr-mGrace/RadarSweep
+
+Included features
+WASD movement
+Missile management
+Missile targeting
+AI Friend and Foe
+Multiple levels + tutorial + credits
+Adjustable follow cam
+
+Credits
+Design, Programming and Art - Grace Fowler
+Font - Digital-Light Font | 
+https://www.fontpalace.com/font-download/digital-light/
