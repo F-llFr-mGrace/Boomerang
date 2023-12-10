@@ -10,7 +10,7 @@ public class CheckForCompletion : MonoBehaviour
 
     void Start()
     {
-        Invoke("CheckCompletion", 5f);
+        Invoke("CheckCompletion", 10f);
     }
 
     private void Update()
@@ -28,22 +28,24 @@ public class CheckForCompletion : MonoBehaviour
         GameObject[] banditTag = GameObject.FindGameObjectsWithTag("Bandit");
         GameObject[] banditAiTag = GameObject.FindGameObjectsWithTag("BanditAi");
 
-        if (blueTag.Length == 0)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
         if (banditTag.Length == 0 && banditAiTag.Length == 0)
         {
+            //if current scene == scene count - intro scenes
             if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
             }
         }
+
+        if (blueTag.Length == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         didCheck = true;
     }
 }
