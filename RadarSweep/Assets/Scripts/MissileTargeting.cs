@@ -24,7 +24,7 @@ public class MissileTargeting : MonoBehaviour
         Invoke("LookEnable", 0.5f);
         missilePhys = GetComponent<Rigidbody2D>();
         targetPhys = target.GetComponent<Rigidbody2D>();
-        Destroy(gameObject, 60f);
+        Destroy(gameObject, 10f);
     }
 
     private void LookEnable()

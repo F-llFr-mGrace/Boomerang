@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlaneMissileHandler : MonoBehaviour
@@ -10,13 +11,18 @@ public class PlaneMissileHandler : MonoBehaviour
     GameObject lockTarget = null;
     GameObject closestTarget = null;
     int intendedTarget = 0;
-    [SerializeField] int missileCountMax = 12;
     bool isValidTarget = false;
     bool isReloading = false;
     Color missileColor = Color.white;
 
-    public int missileCount = 5;
+    public int missileCountMax = 6;
+    public int missileCount = 6;
     public bool isChaff;
+
+    private void Update()
+    {
+        
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -893,7 +893,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 387ac25c3846d654a9d65a0db83984d2, type: 3}
-  m_Color: {r: 0.24904013, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1348,8 +1348,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -236.92, y: 168.58}
-  m_SizeDelta: {x: 326.1512, y: 112.8383}
+  m_AnchoredPosition: {x: -136.76025, y: 185.68042}
+  m_SizeDelta: {x: 526.4707, y: 78.6374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458718850
 MonoBehaviour:
@@ -1373,8 +1373,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Missiles : missileCount'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 86dc7325665a43846a7a8d4157d13057, type: 2}
+  m_sharedMaterial: {fileID: 7569616858550737656, guid: 86dc7325665a43846a7a8d4157d13057, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1398,8 +1398,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1480,6 +1480,7 @@ MonoBehaviour:
   player: {fileID: 1078036138}
   missileCountText: {fileID: 1458718850}
   gameCanvas: {fileID: 588029516}
+  PlaneMissileHandlerScript: {fileID: 1078036145}
 --- !u!4 &1541789316
 Transform:
   m_ObjectHideFlags: 0
