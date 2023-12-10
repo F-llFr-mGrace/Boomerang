@@ -1009,8 +1009,8 @@ MonoBehaviour:
   planePhys: {fileID: 1078036141}
   planeTran: {fileID: 1078036140}
   radarScope: {fileID: 2077087234}
-  missileCountMax: 12
-  missileCount: 12
+  missileCountMax: 6
+  missileCount: 6
   isChaff: 0
 --- !u!58 &1078036146
 CircleCollider2D:

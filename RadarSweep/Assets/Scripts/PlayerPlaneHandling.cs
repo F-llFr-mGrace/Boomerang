@@ -66,12 +66,18 @@ public class PlayerPlaneHandling : MonoBehaviour
 
     private void OnCamControlAdd()
     {
-        Debug.Log("Cam zoom out");
-        mainCam.m_Lens.OrthographicSize += 500;
+        if (mainCam.m_Lens.OrthographicSize < 2000)
+        {
+            Debug.Log("Cam zoom out");
+            mainCam.m_Lens.OrthographicSize += 500;
+        }
     }
     private void OnCamControlSubtract()
     {
-        Debug.Log("Cam zoom in");
-        mainCam.m_Lens.OrthographicSize -= 500;
+        if (mainCam.m_Lens.OrthographicSize > 500)
+        {
+            Debug.Log("Cam zoom in");
+            mainCam.m_Lens.OrthographicSize -= 500;
+        }
     }
 }
